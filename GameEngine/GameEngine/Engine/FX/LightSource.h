@@ -1,6 +1,6 @@
 #ifndef LIGHTSOURCE_H
 #define LIGHTSOURCE_H
-#include <glm/detail/type_vec3.hpp>
+#include <glm/glm.hpp>
 
 
 class LightSource

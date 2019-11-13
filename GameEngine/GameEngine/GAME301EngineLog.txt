@@ -1,1 +1,1 @@
-Info: Everything worked in: d:\humber\semester 5\game 301_game engine design 2\projects\gameengine\gameengine\engine\core\coreengine.cpp on line: 67
+Info: Everything worked in: d:\humber\semester 5\game 301_game engine design 2\githubengine\gameengine\gameengine\gameengine\engine\core\coreengine.cpp on line: 67

@@ -1,9 +1,5 @@
 #include "MaterialLoader.h"
 
-
-
-
-
 void MaterialLoader::LoadMaterial(std::string file_)
 {
 
@@ -27,21 +23,43 @@ void MaterialLoader::LoadMaterial(std::string file_)
 			matname = line.substr(7);
 			m.diffuceMap = LoadTexture(matname);
 		}
-		if (line.substr(0, 3) == "/tNs")
+		if (line.substr(0, 3) == "\tNs")
 		{
 			std::istringstream v(line.substr(3));
 			float ns;
 			v >> ns;
 			m.shininess = ns;
 		}
-		if (line.substr(0, 3) == "/td")
+		if (line.substr(0, 2) == "\td")
 		{
-			std::istringstream v(line.substr(3));
+			std::istringstream v(line.substr(2));
 			float d;
 			v >> d;
-			m.diffuse = d;
+			m.transparency = d;
+		}
+		if (line.substr(0, 3) == "\tKa")
+		{
+			std::istringstream v(line.substr(3));
+			double x, y, z;
+			v >> x >> y >> z;
+			m.ambient = glm::vec3(x, y, z);
+		}
+		if (line.substr(0, 3) == "\tKd")
+		{
+			std::istringstream v(line.substr(3));
+			double x, y, z;
+			v >> x >> y >> z;
+			m.diffuse = glm::vec3(x, y, z);
+		}
+		if (line.substr(0, 3) == "\tKs")
+		{
+			std::istringstream v(line.substr(3));
+			double x, y, z;
+			v >> x >> y >> z;
+			m.specular = glm::vec3(x, y, z);
 		}
 	}
+
 	if(m.diffuceMap != 0)
 	{
 		Materialhandler::getInstance()->AddMaterial(matname, m);

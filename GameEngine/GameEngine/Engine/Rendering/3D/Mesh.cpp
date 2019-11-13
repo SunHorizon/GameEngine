@@ -87,8 +87,9 @@ void Mesh::Render(Camera* camera, std::vector<glm::mat4> &instance_)
 
 	glUniform1i(shinninesLoc, subMesh.material.shininess);
 	glUniform1i(transparencyLoc, subMesh.material.transparency);
+
 	glUniform3f(ambientLoc, subMesh.material.ambient.x, subMesh.material.ambient.y, subMesh.material.ambient.z);
-	glUniform1i(diffuseLoc, subMesh.material.diffuceMap);
+	glUniform3f(diffuseLoc, subMesh.material.diffuse.x, subMesh.material.diffuse.y, subMesh.material.diffuse.z);
 	glUniform3f(specLoc, subMesh.material.specular.x, subMesh.material.specular.y, subMesh.material.specular.z);
 
 

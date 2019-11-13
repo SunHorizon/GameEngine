@@ -279,6 +279,8 @@ bool GameScene::OnCreate()
 
 	SceneGraph::getInstance()->GetGameObject("Dice")->SetPosition(glm::vec3(2.0f, -1.0f, -1.0f));
 	SceneGraph::getInstance()->GetGameObject("Dice")->SetScale(glm::vec3(0.5));
+
+
 	return true;
 }
 
@@ -294,6 +296,5 @@ void GameScene::Render()
 
 void GameScene::OnDestroy()
 {
-
 
 }
