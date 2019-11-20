@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "3D/GameObject.h"
+#include "../Math/CollisionHandler.h"
 
 class SceneGraph
 {

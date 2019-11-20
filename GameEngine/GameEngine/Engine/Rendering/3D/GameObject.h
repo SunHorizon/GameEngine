@@ -22,11 +22,13 @@ public:
 	void SetRotation(glm::vec3 rotation_);
 	void SetScale(glm::vec3 scale_);
 	void SetAngle(float angle_);
+	bool GetHit() const;
 
 	BoundingBox getBoundingBox();
 	void Update(const float deltaTime_);
 	void setTag(std::string tag_);
 	std::string getTag();
+	void SetHit(bool hit_, int button_type);
 
 private:
 	Model* model;
@@ -35,6 +37,7 @@ private:
 	int modelInstance;
 	BoundingBox boundingBox;
 	std::string tag;
+	bool hit;
 };
 
 #endif // !GAMEOBJECT_H

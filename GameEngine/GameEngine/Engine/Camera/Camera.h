@@ -24,6 +24,8 @@ public:
 
 	void ProcessMouseMovement(float xOffSet_, float yOffSet_);
 	void ProcessMouseZoom(float y_);
+
+	glm::vec2 GetClippingPlanes() const;
 private:
 	void UpdateCameraVector();
 	glm::vec3 position;

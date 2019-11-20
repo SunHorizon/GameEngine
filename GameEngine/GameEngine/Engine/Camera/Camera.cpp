@@ -102,6 +102,11 @@ void Camera::ProcessMouseZoom(float y_)
 	UpdateCameraVector();
 }
 
+glm::vec2 Camera::GetClippingPlanes() const
+{
+	return glm::vec2(nearPlane, farPlane);
+}
+
 void Camera::UpdateCameraVector()
 {
 	fowardVector.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));

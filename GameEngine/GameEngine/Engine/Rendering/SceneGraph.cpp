@@ -42,6 +42,7 @@ void SceneGraph::addGameObject(GameObject* gameobject_, std::string name_)
 		gameobject_->setTag(newName);
 		sceneGameObject[newName] = gameobject_;
 	}
+	CollisionHandler::GetInstance()->AddObject(gameobject_);
 }
 
 void SceneGraph::addModel(Model* model_)

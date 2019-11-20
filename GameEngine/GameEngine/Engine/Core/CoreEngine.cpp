@@ -88,7 +88,12 @@ void CoreEngine::OnDestroy()
 		delete window;
 		window = nullptr;
 	}
+
+	TextureHandler::getInstance()->OnDestory();
+	Materialhandler::getInstance()->OnDestroy();
+	ShaderHandler::GetInstance()->OnDestroy();
 	
+
 	SDL_Quit();
 	exit(0);
 }
@@ -180,15 +185,15 @@ void CoreEngine::NotifyMousePressed(int x, int y)
 
 void CoreEngine::NotifyMouseReleased(int x, int y, int buttonType_)
 {
-
+	CollisionHandler::GetInstance()->update(glm::vec2(x, y), buttonType_);
 }
 
 void CoreEngine::NotifyOfMouseMove(int x, int y)
 {
-	if(camera)
-	{
-		camera->ProcessMouseMovement(MouseEventListener::GetMouseOffset().x, MouseEventListener::GetMouseOffset().y);
-	}
+	//if(camera)
+	//{
+	//	camera->ProcessMouseMovement(MouseEventListener::GetMouseOffset().x, MouseEventListener::GetMouseOffset().y);
+	//}
 }
 
 void CoreEngine::NotifyOfMouseScroll(int y_)

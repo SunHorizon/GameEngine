@@ -2,7 +2,7 @@
 
 
 
-GameObject::GameObject(Model* model_) : model(nullptr), tag("")
+GameObject::GameObject(Model* model_) : model(nullptr), tag(""), hit(false)
 {
 	model = model_;
 	position = glm::vec3();
@@ -17,7 +17,7 @@ GameObject::GameObject(Model* model_) : model(nullptr), tag("")
 	}
 }
 
-GameObject::GameObject(Model* model_, glm::vec3 position__) : model(nullptr)
+GameObject::GameObject(Model* model_, glm::vec3 position__) : model(nullptr), hit(false)
 {
 	model = model_;
 	position = position__;
@@ -137,4 +137,15 @@ void GameObject::setTag(std::string tag_)
 std::string GameObject::getTag()
 {
 	return tag;
+}
+
+
+bool GameObject::GetHit() const
+{
+	return hit;
+}
+void GameObject::SetHit(bool hit_, int button_type)
+{
+	hit = hit_;
+	std::cout << "Hit" << tag << std::endl;
 }
