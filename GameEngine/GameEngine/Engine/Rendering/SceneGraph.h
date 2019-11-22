@@ -33,7 +33,6 @@ private:
 	static std::map<std::string, GameObject*> sceneGameObject;
 	static std::map<GLuint, std::vector<Model*>> sceneModels;
 
-
 	SceneGraph();
 	~SceneGraph();
 };

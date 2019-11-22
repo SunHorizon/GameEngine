@@ -275,6 +275,7 @@ bool GameScene::OnCreate()
 	}
 
 	SceneGraph::getInstance()->GetGameObject("Apple")->SetPosition(glm::vec3(-3.0f, -1.0f, -6.0f));
+	//SceneGraph::getInstance()->GetGameObject("Apple")->SetPosition(glm::vec3(-10.0f, -1.0f, -6.0f));
 	//SceneGraph::getInstance()->GetGameObject("Apple")->SetScale(glm::vec3(0.5));
 
 	SceneGraph::getInstance()->GetGameObject("Dice")->SetPosition(glm::vec3(2.0f, -2.0f, -1.0f));
@@ -287,12 +288,36 @@ bool GameScene::OnCreate()
 void GameScene::Update(const float deltaTime_)
 {
 	SceneGraph::getInstance()->Update(deltaTime_);
+	if(!CheckFrustum())
+	{
+		std::cout << "Apple is not visible" << std::endl;
+	}
+	else
+	{
+		std::cout << "Apple is visible" << std::endl;;
+	}
 }
 
 void GameScene::Render()
 {
 	SceneGraph::getInstance()->Render(CoreEngine::getInstance()->GetCamera());
 }
+
+
+bool GameScene::CheckFrustum()
+{
+	glm::vec3 objectTransform = SceneGraph::getInstance()->GetGameObject("Apple")->GetPosition();
+	std::vector<glm::vec4> Planes = CoreEngine::getInstance()->GetCamera()->FrustumCulling();
+
+	for (int i = 0; i < 6; i++) {
+		if (Planes[i].x * objectTransform.x + Planes[i].y * objectTransform.y + Planes[i].z * objectTransform.z + Planes[i].w <= 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 
 void GameScene::OnDestroy()
 {

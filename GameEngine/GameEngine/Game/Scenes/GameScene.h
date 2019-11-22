@@ -14,6 +14,8 @@ public:
 	virtual void OnDestroy();
 
 private:
+
+	bool CheckFrustum();
 };
 
 #endif // !GAMESCENE_H

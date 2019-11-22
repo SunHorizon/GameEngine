@@ -5,7 +5,6 @@ std::unique_ptr<SceneGraph> SceneGraph::SceneGraphInstance = nullptr;
 std::map<std::string, GameObject*> SceneGraph::sceneGameObject = std::map<std::string, GameObject*>();
 std::map<GLuint, std::vector<Model*>> SceneGraph::sceneModels = std::map<GLuint, std::vector<Model*>>();
 
-
 SceneGraph::SceneGraph()
 {
 }
@@ -117,7 +116,6 @@ void SceneGraph::OnDestroy()
 		sceneModels.clear();
 	}
 }
-
 
 SceneGraph::~SceneGraph()
 {

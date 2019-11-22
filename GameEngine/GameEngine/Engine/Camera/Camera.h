@@ -26,6 +26,8 @@ public:
 	void ProcessMouseZoom(float y_);
 
 	glm::vec2 GetClippingPlanes() const;
+
+	std::vector<glm::vec4> FrustumCulling();
 private:
 	void UpdateCameraVector();
 	glm::vec3 position;
@@ -37,5 +39,7 @@ private:
 
 	std::vector<LightSource*> lights;
 	void OnDestory();
+
+	std::vector<glm::vec4> NormalizePlane();
 };
 #endif //!CAMERA_H

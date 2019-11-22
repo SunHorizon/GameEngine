@@ -190,10 +190,10 @@ void CoreEngine::NotifyMouseReleased(int x, int y, int buttonType_)
 
 void CoreEngine::NotifyOfMouseMove(int x, int y)
 {
-	//if(camera)
-	//{
-	//	camera->ProcessMouseMovement(MouseEventListener::GetMouseOffset().x, MouseEventListener::GetMouseOffset().y);
-	//}
+	if(camera)
+	{
+		camera->ProcessMouseMovement(MouseEventListener::GetMouseOffset().x, MouseEventListener::GetMouseOffset().y);
+	}
 }
 
 void CoreEngine::NotifyOfMouseScroll(int y_)
