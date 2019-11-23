@@ -9,22 +9,24 @@ CollisionDetection::~CollisionDetection()
 
 Ray CollisionDetection::ScreenPosToWorldRay(glm::vec2 mouseCoords_, glm::vec2 screenSize_, Camera* camera_)
 {
-	glm::vec4 rayStart_NDC(((mouseCoords_.x / screenSize_.x - 0.5f) * 2.0f), ((mouseCoords_.y / screenSize_.y - 0.5f)) * 2.0f, -1.0f, 1.0f);
-	glm::vec4 rayEnd_NDC(((mouseCoords_.x / screenSize_.x - 0.5f) * 2.0f), ((mouseCoords_.y / screenSize_.y - 0.5f) * 2.0f), 0.0f, 1.0f);
 
+	glm::vec4 rayStart_NDC((mouseCoords_.x / screenSize_.x - 0.5f) * 2.0f, (mouseCoords_.y / screenSize_.y - 0.5f) * 2.0f, -1.0f, 1.0f);
+	glm::vec4 rayEnd_NDC((mouseCoords_.x / screenSize_.x - 0.5f) * 2.0f, (mouseCoords_.y / screenSize_.y - 0.5f) * 2.0f, 0.0f, 1.0f);
 
 	glm::mat4 inverse = glm::inverse(camera_->GetPerspective() * camera_->GetView());
 
-	glm::vec4 rayStart_Word = inverse * rayStart_NDC;
-	rayStart_Word /= rayStart_Word.w;
+	glm::vec4 rayStart_World = inverse * rayStart_NDC;
 
-	glm::vec4 rayEND_World = inverse * rayEnd_NDC;
-	rayEND_World /= rayEND_World.w;
+	rayStart_World /= rayStart_World.w;
 
-	glm::vec3 rayDir_World(rayStart_Word - rayEND_World);
+	glm::vec4 rayEnd_World = inverse * rayEnd_NDC;
+	rayEnd_World /= rayEnd_World.w;
+
+	glm::vec3 rayDir_World(rayEnd_World - rayStart_World);
+
 	rayDir_World = glm::normalize(rayDir_World);
 
-	return  Ray(glm::vec3(rayStart_Word), rayDir_World);
+	return  Ray(glm::vec3(rayStart_World), rayDir_World);
 
 }
 
@@ -62,7 +64,7 @@ bool CollisionDetection::RayOBBIntersection(Ray* ray_, BoundingBox* box_)
 		{
 			tMax = t2;
 		}
-		if (t2 > tMin)
+		if (t1 > tMin)
 		{
 			tMin = t1;
 		}
@@ -70,7 +72,8 @@ bool CollisionDetection::RayOBBIntersection(Ray* ray_, BoundingBox* box_)
 		{
 			return  false;
 		}
-	}else
+	}
+	else
 	{
 		if(-e + aabbMin.x > 0.0f || -e + aabbMax.x < 0.0f)
 		{
@@ -97,7 +100,7 @@ bool CollisionDetection::RayOBBIntersection(Ray* ray_, BoundingBox* box_)
 		{
 			tMax = t2;
 		}
-		if (t2 > tMin)
+		if (t1 > tMin)
 		{
 			tMin = t1;
 		}
@@ -134,7 +137,7 @@ bool CollisionDetection::RayOBBIntersection(Ray* ray_, BoundingBox* box_)
 		{
 			tMax = t2;
 		}
-		if (t2 > tMin)
+		if (t1 > tMin)
 		{
 			tMin = t1;
 		}
