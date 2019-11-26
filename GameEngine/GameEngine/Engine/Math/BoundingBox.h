@@ -20,6 +20,32 @@ struct BoundingBox
 		transform = transform_;
 
 	}
+
+	inline bool Intersects(BoundingBox* box_)
+	{
+		glm::vec3 minCorner = getTransformPoint(minVert, transform);
+		glm::vec3 maxCorner = getTransformPoint(maxVert, transform);
+
+		glm::vec3 otherMinCorner = getTransformPoint(box_->minVert, box_->transform);
+		glm::vec3 otherMaxCorner = getTransformPoint(box_->maxVert, box_->transform);
+		
+
+		if((otherMinCorner.x <= maxCorner.x && otherMaxCorner.x >= minCorner.x) &&
+			(otherMinCorner.y <= maxCorner.y && otherMaxCorner.y >= minCorner.y) &&
+			(otherMinCorner.z <= maxCorner.z && otherMaxCorner.z >= minCorner.z))
+		{
+
+			return false;
+		}
+
+		return true;
+	}
+
+	inline glm::vec3 getTransformPoint(glm::vec3 point_, glm::mat4 transform_)
+	{
+		return glm::vec3(transform_[3].x, transform_[3].y, transform_[3].z + point_);
+	}
+
 };
 
 #endif // !BOUNDINGBOX_H
