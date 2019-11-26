@@ -18,7 +18,7 @@ bool GameScene::OnCreate()
 	CoreEngine::getInstance()->SetCamera(new Camera);
 	CoreEngine::getInstance()->GetCamera()->setPosition(glm::vec3(0.0f, 0.0f, 4.0f));
 	CoreEngine::getInstance()->GetCamera()->addLightSource(new LightSource(glm::vec3(0.0f, 0.0f, 2.0f), 0.1f, 0.5f, glm::vec3(1.0f, 1.0f, 1.0f)));
-	CollisionHandler::GetInstance()->onCreate(100.0f);
+	CollisionHandler::GetInstance()->onCreate();
 
 	Model* model = new Model("Resources/Models/Apple.obj", "Resources/Materials/Apple.mtl", ShaderHandler::GetInstance()->GetShader("BasicShader"));
 	Model* model1 = new Model("Resources/Models/Dice.obj", "Resources/Materials/Dice.mtl", ShaderHandler::GetInstance()->GetShader("BasicShader"));
@@ -302,6 +302,7 @@ void GameScene::Render()
 {
 	SceneGraph::getInstance()->Render(CoreEngine::getInstance()->GetCamera());
 }
+
 
 bool GameScene::CheckFrustum()
 {
