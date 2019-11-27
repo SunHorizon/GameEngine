@@ -54,10 +54,14 @@ void OctNode::Octify(int depth_)
 	if(depth_ > 0 && this) 
 	{
 		float half = size / 2.0f;
-		children[OCT_TLF] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y + + half, octBounds->minVert.z + half), half, this);
-		children[OCT_BLF] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y, octBounds->minVert.z + half), half, this);
-		children[OCT_BRF] = new OctNode(glm::vec3(octBounds->minVert.x + half, octBounds->minVert.y, octBounds->minVert.z + half), half, this);
-		//TODO: finish for other children
+		children[OCT_TLF] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y + half, octBounds->minVert.z + half), half, this);
+		children[OCT_BLF] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y + half + half, octBounds->minVert.z + half), half, this);
+		children[OCT_BRF] = new OctNode(glm::vec3(octBounds->minVert.x + half, octBounds->minVert.y + half + half, octBounds->minVert.z + half), half, this);
+		children[OCT_TRF] = new OctNode(glm::vec3(octBounds->minVert.x + half, octBounds->minVert.y + half, octBounds->minVert.z + half), half, this);
+		children[OCT_TLR] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y + half, octBounds->minVert.z + half + half), half, this);
+		children[OCT_BLR] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y + half + half, octBounds->minVert.z + half + half), half, this);
+		children[OCT_BRR] = new OctNode(glm::vec3(octBounds->minVert.x + half, octBounds->minVert.y + half + half, octBounds->minVert.z + half + half), half, this);
+		children[OCT_TRR] = new OctNode(glm::vec3(octBounds->minVert.x + half + half, octBounds->minVert.y + half + half, octBounds->minVert.z + half + half), half, this);
 		childNumber += 8;
 	}
 
