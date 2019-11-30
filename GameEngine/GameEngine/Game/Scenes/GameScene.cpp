@@ -290,11 +290,11 @@ void GameScene::Update(const float deltaTime_)
 	SceneGraph::getInstance()->Update(deltaTime_);
 	if(!CheckFrustum())
 	{
-		std::cout << "Apple is not visible" << std::endl;
+		//std::cout << "Apple is not visible" << std::endl;
 	}
 	else
 	{
-		std::cout << "Apple is visible" << std::endl;;
+		//std::cout << "Apple is visible" << std::endl;;
 	}
 }
 

@@ -34,16 +34,15 @@ struct BoundingBox
 			(otherMinCorner.y <= maxCorner.y && otherMaxCorner.y >= minCorner.y) &&
 			(otherMinCorner.z <= maxCorner.z && otherMaxCorner.z >= minCorner.z))
 		{
-
-			return false;
+			return true;			
 		}
 
-		return true;
+		return false;
 	}
 
 	inline glm::vec3 getTransformPoint(glm::vec3 point_, glm::mat4 transform_)
 	{
-		return glm::vec3(transform_[3].x, transform_[3].y, transform_[3].z + point_);
+		return glm::vec3(transform_[3].x, transform_[3].y, transform_[3].z) + point_;
 	}
 
 };

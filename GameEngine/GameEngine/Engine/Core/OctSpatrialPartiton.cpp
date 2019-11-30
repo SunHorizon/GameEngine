@@ -13,7 +13,7 @@ OctNode::OctNode(glm::vec3 position_, float size_, OctNode* parent_) : octBounds
 	
 	for(int i = 0; i < 8; i++)
 	{
-		children[i] = 0;
+		children[i] = nullptr;
 	}
 
 	parent = parent_;
@@ -55,13 +55,14 @@ void OctNode::Octify(int depth_)
 	{
 		float half = size / 2.0f;
 		children[OCT_TLF] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y + half, octBounds->minVert.z + half), half, this);
-		children[OCT_BLF] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y + half + half, octBounds->minVert.z + half), half, this);
-		children[OCT_BRF] = new OctNode(glm::vec3(octBounds->minVert.x + half, octBounds->minVert.y + half + half, octBounds->minVert.z + half), half, this);
-		children[OCT_TRF] = new OctNode(glm::vec3(octBounds->minVert.x + half, octBounds->minVert.y + half, octBounds->minVert.z + half), half, this);
-		children[OCT_TLR] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y + half, octBounds->minVert.z + half + half), half, this);
-		children[OCT_BLR] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y + half + half, octBounds->minVert.z + half + half), half, this);
-		children[OCT_BRR] = new OctNode(glm::vec3(octBounds->minVert.x + half, octBounds->minVert.y + half + half, octBounds->minVert.z + half + half), half, this);
-		children[OCT_TRR] = new OctNode(glm::vec3(octBounds->minVert.x + half + half, octBounds->minVert.y + half + half, octBounds->minVert.z + half + half), half, this);
+		children[OCT_BLF] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y, octBounds->minVert.z + half), half, this);
+		children[OCT_BRF] = new OctNode(glm::vec3(octBounds->minVert.x + half, octBounds->minVert.y, octBounds->minVert.z + half), half, this);
+		children[OCT_TRF] = new OctNode(glm::vec3(octBounds->minVert.x + half, octBounds->minVert.y + half, octBounds->minVert.z), half, this);
+		children[OCT_TLR] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y - half, octBounds->minVert.z - half), half, this);
+		children[OCT_BLR] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y, octBounds->minVert.z - half), half, this);
+		children[OCT_BRR] = new OctNode(glm::vec3(octBounds->minVert.x - half, octBounds->minVert.y, octBounds->minVert.z + half), half, this);
+		children[OCT_TRR] = new OctNode(glm::vec3(octBounds->minVert.x - half, octBounds->minVert.y - half, octBounds->minVert.z), half, this);
+		
 		childNumber += 8;
 	}
 
@@ -151,8 +152,6 @@ GameObject* OctSpatrialPartiton::GetCollision(Ray ray_)
 {
 	rayIntersectionList.clear();
 	PrepareCollisionQuery(root, ray_);
-	// TODO: do this, is the same as collision handler
-
 	GameObject* hitResult = nullptr;
 	float shortestDist = FLT_MAX;
 	for (auto go : rayIntersectionList)
