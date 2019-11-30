@@ -16,6 +16,7 @@ class OctNode
 		OCT_BLR,
 		OCT_BRR,
 		OCT_TRR,
+
 	};
 
 	OctNode(glm::vec3 position_, float size_, OctNode* parent_);
