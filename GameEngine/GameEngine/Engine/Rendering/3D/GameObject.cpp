@@ -147,8 +147,5 @@ bool GameObject::GetHit() const
 void GameObject::SetHit(bool hit_, int button_type)
 {
 	hit = hit_;
-	if(hit)
-	{
-		std::cout << "Hit" << tag << std::endl;
-	}
+	std::cout << "Hit" << tag << std::endl;
 }

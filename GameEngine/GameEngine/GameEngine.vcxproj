@@ -145,7 +145,6 @@
     <ClCompile Include="Engine\Rendering\SceneGraph.cpp" />
     <ClCompile Include="Engine\Graphics\Materialhandler.cpp" />
     <ClCompile Include="Engine\FX\MaterialLoader.cpp" />
-    <ClCompile Include="Engine\Core\OctSpatrialPartiton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Math\CollisionHandler.h" />
@@ -174,7 +173,6 @@
     <ClInclude Include="Engine\Rendering\SceneGraph.h" />
     <ClInclude Include="Engine\Graphics\Materialhandler.h" />
     <ClInclude Include="Engine\FX\MaterialLoader.h" />
-    <ClInclude Include="Engine\Core\OctSpatrialPartiton.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shaders\ColourFragShader.glsl" />
