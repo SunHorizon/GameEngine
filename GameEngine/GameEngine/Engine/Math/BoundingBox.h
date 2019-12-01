@@ -34,7 +34,7 @@ struct BoundingBox
 			(otherMinCorner.y <= maxCorner.y && otherMaxCorner.y >= minCorner.y) &&
 			(otherMinCorner.z <= maxCorner.z && otherMaxCorner.z >= minCorner.z))
 		{
-			return true;			
+			return true;
 		}
 
 		return false;

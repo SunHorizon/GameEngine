@@ -62,7 +62,7 @@ void OctNode::Octify(int depth_)
 		children[OCT_BLR] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y, octBounds->minVert.z - half), half, this);
 		children[OCT_BRR] = new OctNode(glm::vec3(octBounds->minVert.x - half, octBounds->minVert.y, octBounds->minVert.z + half), half, this);
 		children[OCT_TRR] = new OctNode(glm::vec3(octBounds->minVert.x - half, octBounds->minVert.y - half, octBounds->minVert.z), half, this);
-		
+
 		childNumber += 8;
 	}
 
@@ -154,15 +154,15 @@ GameObject* OctSpatrialPartiton::GetCollision(Ray ray_)
 	PrepareCollisionQuery(root, ray_);
 	GameObject* hitResult = nullptr;
 	float shortestDist = FLT_MAX;
-	for (auto go : rayIntersectionList)
+	for (auto node : rayIntersectionList)
 	{
-		for(auto go1 : go->objectList)
+		for(auto go : node->objectList)
 		{
-			if (ray_.IsColliding(&go1->getBoundingBox()))
+			if (ray_.IsColliding(&go->getBoundingBox()))
 			{
 				if (ray_.intersectionDistance < shortestDist)
 				{
-					hitResult = go1;
+					hitResult = go;
 					shortestDist = ray_.intersectionDistance;
 				}
 			}
@@ -193,6 +193,7 @@ void OctSpatrialPartiton::AddObjectToCell(OctNode* cell_, GameObject* obj__)
 					AddObjectToCell(cell_->GetChild(static_cast<OctNode::OctChildren>(i)), obj__);
 				}
 			}
+
 		}
 	}
 }
