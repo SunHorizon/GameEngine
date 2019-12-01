@@ -10,8 +10,8 @@ OctNode::OctNode(glm::vec3 position_, float size_, OctNode* parent_) : octBounds
 	octBounds->maxVert = position_ + glm::vec3(size_);
 
 	size = size_;
-	
-	for(int i = 0; i < 8; i++)
+
+	for (int i = 0; i < 8; i++)
 	{
 		children[i] = nullptr;
 	}
@@ -30,18 +30,18 @@ void OctNode::OnDestroy()
 	delete octBounds;
 	octBounds = nullptr;
 
-	if(objectList.size() > 0)
+	if (objectList.size() > 0)
 	{
-		for(auto go : objectList)
+		for (auto go : objectList)
 		{
-			 go = nullptr;
+			go = nullptr;
 		}
 		objectList.clear();
 	}
 
-	for(int i = 0; i < 8; i++)
+	for (int i = 0; i < 8; i++)
 	{
-		if(children[i] != nullptr)
+		if (children[i] != nullptr)
 		{
 			delete children[i];
 			children[i] = nullptr;
@@ -51,7 +51,7 @@ void OctNode::OnDestroy()
 
 void OctNode::Octify(int depth_)
 {
-	if(depth_ > 0 && this) 
+	if (depth_ > 0 && this)
 	{
 		float half = size / 2.0f;
 		children[OCT_TLF] = new OctNode(glm::vec3(octBounds->minVert.x, octBounds->minVert.y + half, octBounds->minVert.z + half), half, this);
@@ -66,9 +66,9 @@ void OctNode::Octify(int depth_)
 		childNumber += 8;
 	}
 
-	if(depth_ > 0 && this)
+	if (depth_ > 0 && this)
 	{
-		for(int i = 0; i < 8; i++)
+		for (int i = 0; i < 8; i++)
 		{
 			children[i]->Octify(depth_ - 1);
 		}
@@ -96,9 +96,9 @@ int OctNode::GetObjectCount() const
 	return objectList.size();
 }
 
-bool OctNode::IsLeaf()
+bool OctNode::IsLeaf() const
 {
-	if(children[0] == nullptr)
+	if (children[0] == nullptr)
 	{
 		return  true;
 	}
@@ -133,9 +133,9 @@ void OctSpatrialPartiton::OnDestroy()
 	delete root;
 	root = nullptr;
 
-	if(rayIntersectionList.size() > 0)
+	if (rayIntersectionList.size() > 0)
 	{
-		for(auto cell : rayIntersectionList)
+		for (auto cell : rayIntersectionList)
 		{
 			cell = nullptr;
 		}
@@ -152,11 +152,13 @@ GameObject* OctSpatrialPartiton::GetCollision(Ray ray_)
 {
 	rayIntersectionList.clear();
 	PrepareCollisionQuery(root, ray_);
+
 	GameObject* hitResult = nullptr;
+	
 	float shortestDist = FLT_MAX;
 	for (auto node : rayIntersectionList)
 	{
-		for(auto go : node->objectList)
+		for (auto go : node->objectList)
 		{
 			if (ray_.IsColliding(&go->getBoundingBox()))
 			{
@@ -167,28 +169,28 @@ GameObject* OctSpatrialPartiton::GetCollision(Ray ray_)
 				}
 			}
 		}
-	
+
 	}
 
 	return hitResult;
-	
+
 }
 
 void OctSpatrialPartiton::AddObjectToCell(OctNode* cell_, GameObject* obj__)
 {
-	if(cell_)
+	if (cell_)
 	{
 		BoundingBox nodeBox = *cell_->GetBoundBox();
-		if(nodeBox.Intersects(&obj__->getBoundingBox()))
+		if (nodeBox.Intersects(&obj__->getBoundingBox()))
 		{
-			if(cell_->IsLeaf())
+			if (cell_->IsLeaf())
 			{
 				cell_->AddCollisonObject(obj__);
 				std::cout << "Added " << obj__->getTag() << " to cell: " << glm::to_string(nodeBox.maxVert) << std::endl;
 			}
 			else
 			{
-				for(int i = 0; i < 8 ; i ++)
+				for (int i = 0; i < 8; i++)
 				{
 					AddObjectToCell(cell_->GetChild(static_cast<OctNode::OctChildren>(i)), obj__);
 				}
@@ -200,17 +202,17 @@ void OctSpatrialPartiton::AddObjectToCell(OctNode* cell_, GameObject* obj__)
 
 void OctSpatrialPartiton::PrepareCollisionQuery(OctNode* cell_, Ray ray_)
 {
-	if(cell_)
+	if (cell_)
 	{
-		if(ray_.IsColliding(cell_->GetBoundBox()))
+		if (ray_.IsColliding(cell_->GetBoundBox()))
 		{
-			if(cell_->IsLeaf())
+			if (cell_->IsLeaf())
 			{
 				rayIntersectionList.push_back(cell_);
 			}
 			else
 			{
-				for(int i = 0; i < 8; i++)
+				for (int i = 0; i < 8; i++)
 				{
 					PrepareCollisionQuery(cell_->GetChild(static_cast<OctNode::OctChildren>(i)), ray_);
 				}

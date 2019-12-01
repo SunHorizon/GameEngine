@@ -274,12 +274,16 @@ bool GameScene::OnCreate()
 			//}
 	}
 
-	SceneGraph::getInstance()->GetGameObject("Apple")->SetPosition(glm::vec3(-3.0f, -1.0f, -6.0f));
+	//SceneGraph::getInstance()->GetGameObject("Apple")->SetPosition(glm::vec3(-3.0f, -1.0f, -6.0f));
 	//SceneGraph::getInstance()->GetGameObject("Apple")->SetPosition(glm::vec3(-10.0f, -1.0f, -6.0f));
 	//SceneGraph::getInstance()->GetGameObject("Apple")->SetScale(glm::vec3(0.5));
 
-	SceneGraph::getInstance()->GetGameObject("Dice")->SetPosition(glm::vec3(2.0f, -2.0f, -1.0f));
+	//SceneGraph::getInstance()->GetGameObject("Dice")->SetPosition(glm::vec3(2.0f, -2.0f, -1.0f));
 	//SceneGraph::getInstance()->GetGameObject("Dice")->SetScale(glm::vec3(0.5));
+
+
+	SceneGraph::getInstance()->GetGameObject("Apple")->SetPosition(glm::vec3(-5.0f, -0.0f, -8.0f));
+	SceneGraph::getInstance()->GetGameObject("Dice")->SetPosition(glm::vec3(4.0f, 0.0f, -2.0f));
 
 
 	return true;

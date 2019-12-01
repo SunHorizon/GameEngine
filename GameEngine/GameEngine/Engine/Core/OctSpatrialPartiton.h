@@ -27,7 +27,7 @@ class OctNode
 	OctNode* GetChild(OctChildren childPos_);
 	void AddCollisonObject(GameObject* obj_);
 	int GetObjectCount() const;
-	bool IsLeaf();
+	bool IsLeaf() const;
 	BoundingBox* GetBoundBox() const;
 	int GetChildCount() const;
 
